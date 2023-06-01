@@ -355,6 +355,8 @@ public class PhoneBookMain {
 							try 
 							{
 								PBList.remove(nameSet[(start-1) + (submode-1)]);
+								savePB();
+								modeDel = 0;
 							}
 							catch(Exception E)
 							{
