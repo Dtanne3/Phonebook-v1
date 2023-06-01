@@ -215,7 +215,7 @@ public class PhoneBookMain {
 		CLSearchName = ser;
 		modeS = 1;
 	}
-	//TODO: Implement save / load functionality
+	
 	static void savePB() 
 	{
 		try
@@ -249,7 +249,6 @@ public class PhoneBookMain {
 	//Main
 	public static void main(String[] args)
 	{
-		
 		if(loadPB() == false) {PBList = new HashMap<String, ContactList>();}
 		mode = 0;
 		while(true) 
@@ -310,7 +309,7 @@ public class PhoneBookMain {
 									else
 									{
 										
-										//temporary solution for ui control swap
+										
 										if(modeS == 0)
 										{
 											switch(subS)
@@ -319,7 +318,6 @@ public class PhoneBookMain {
 												printMenu(2);
 												break;
 											case 2:
-												//delete contact
 												modeDel = 1;
 												printMenu(4);
 												break;
