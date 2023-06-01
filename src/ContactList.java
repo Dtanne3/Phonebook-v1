@@ -1,13 +1,14 @@
 import java.util.Comparator;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Map;
 import java.util.HashMap;
 
-public class ContactList {
+public class ContactList implements Serializable {
 	
-	private class Contact 
+	private class Contact implements Serializable 
 	{
 
 		private String name;

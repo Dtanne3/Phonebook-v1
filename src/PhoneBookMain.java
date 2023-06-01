@@ -1,11 +1,12 @@
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
 
 public class PhoneBookMain {
 	
@@ -17,7 +18,7 @@ public class PhoneBookMain {
 	static Map<String, String> CLContacts = null;
 	static Map<String, ContactList> PBList; 
 	static String[]nameSet = null;
-	static File file;
+	static String filename = "ContactListInfo.ser";
 	//Methods
 	static void printMenu (int mode) {
 		clr();
@@ -169,7 +170,7 @@ public class PhoneBookMain {
 		{
 			ContactList list = new ContactList();
 			PBList.put(listName, list);
-			//savePB();
+			savePB();
 		}
 	}
 	static void createContact()
@@ -182,7 +183,7 @@ public class PhoneBookMain {
 		
 		currentList.addEntry(name, number);
 		currentList.sort();
-		//savePB();
+		savePB();
 	}
 	static void movePage(int dir)
 	{
@@ -202,7 +203,7 @@ public class PhoneBookMain {
 		Scanner s = new Scanner(System.in);
 		String rem = s.nextLine();
 		currentList.removeEntry(rem);
-		//savePB();
+		savePB();
 		modeDel = 0;
 		currentList.sort();
 	}
@@ -215,47 +216,40 @@ public class PhoneBookMain {
 		modeS = 1;
 	}
 	//TODO: Implement save / load functionality
-	static void savePB(int type) 
+	static void savePB() 
 	{
-		if(file == null || file.getPath() != "PBContactInfo.txt")
-		{
-			file = new File("PBContactInfo.txt");
-			try
-			{
-				file.createNewFile();
-			}catch(Exception E) {System.out.println("ERROR: Cannot create save file");}
-		}
 		try
 		{
-			if(file.isFile())
-			{
-				FileWriter fileOut = new FileWriter(file);
-				//if file isn't empty, go through list and check if content
-				//is the same on both the software and file. if not, remove
-				//and update the line.
-				if(type == 1)
-				{  
-					// save contact list
-					
-				}
-				else if(type == 2) 
-				{ 
-					//save content in contact list
-				}
-				
-				fileOut.close();
-			}
-			else {System.out.println("error");}
-		}catch(Exception E) {System.out.println("ERROR: Could not save");}
+			FileOutputStream fileOut = new FileOutputStream(filename);
+			ObjectOutputStream infoOut = new ObjectOutputStream(fileOut);
+			infoOut.writeObject(PBList);
+			infoOut.close(); fileOut.close();
+			System.out.println("Info Saved");
+		}
+		catch(Exception E) {System.out.println("ERROR: Info Could Not Be Saved");}
 	}
+		
 	static Boolean loadPB() 
 	{
-		
+		System.out.println("Loading SaveFile");
+		try
+		{
+			FileInputStream fileIn = new FileInputStream(filename);
+			ObjectInputStream infoIn = new ObjectInputStream(fileIn);
+			PBList = (HashMap) infoIn.readObject();
+			infoIn.close(); fileIn.close();
+			clr();
+			System.out.println("SUCCESS: SaveFile Found");
+			return true;
+		}
+		catch(Exception E) {System.out.println("ERROR: SaveFile Could Not Be Loaded"); }
 		return false;
+		
 	}
 	//Main
 	public static void main(String[] args)
 	{
+		
 		if(loadPB() == false) {PBList = new HashMap<String, ContactList>();}
 		mode = 0;
 		while(true) 
