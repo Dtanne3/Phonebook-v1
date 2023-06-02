@@ -369,25 +369,28 @@ public class PhoneBookMain {
 				}
 				else
 				{
-					switch(submode)
+					if((submode >= 4 && submode < 8) || submode == 0)
 					{
-					case 4:
-						movePage(-1);
-						break;
-					case 5:
-						movePage(1);
-						break;
-					case 6:
-						printMenu(2);
-						break;
-					case 7:
-						modeDel = 1;
-						break;
-					case 0:
-						start = 1; end = 3;
-						mode = 0;
-						break;
-					
+						switch(submode)
+						{
+						case 4:
+							movePage(-1);
+							break;
+						case 5:
+							movePage(1);
+							break;
+						case 6:
+							printMenu(2);
+							break;
+						case 7:
+							modeDel = 1;
+							break;
+						case 0:
+							start = 1; end = 3;
+							mode = 0;
+							break;
+						
+						}
 					}
 				}
 			}
