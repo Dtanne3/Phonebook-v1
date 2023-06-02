@@ -38,7 +38,7 @@ public class PhoneBookMain {
 				System.out.println("--------------------------------------");
 				if(modeDel != 1)
 				{
-					System.out.println("Press 1-3 to select phonebook\n" + 
+					System.out.println("Press 1-3 to select phonebook row\n" + 
 							"Press 4 or 5 to turn page(4 = left / 5 = right)\n"
 									+ "Press 6 to create new phonebook\n"
 									+ "Press 7 to delete phonebook\n"
@@ -402,6 +402,7 @@ public class PhoneBookMain {
 				try {mode = s.nextInt();}
 				catch(Exception E) {mode = 1;}
 				if(mode == 2) {printMenu(5); break;}
+				else if(mode < 1 || mode > 2) {mode = 0;}
 			}
 		}
 		return;
