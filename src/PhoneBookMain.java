@@ -58,42 +58,43 @@ public class PhoneBookMain {
 				System.out.println("--------------------------------------");
 		    break;
 			case 3:
-				if(mode == 1)
-				{
-					if(modeS == 1) 
+				
+					if(currentList != null)
 					{
-						CLContacts = currentList.search(CLSearchName);
-						nameSet = currentList.search(CLSearchName).keySet().toArray(new String[currentList.getSize()]);
+						if(modeS == 1) 
+						{
+							CLContacts = currentList.search(CLSearchName);
+							nameSet = currentList.search(CLSearchName).keySet().toArray(new String[currentList.getSize()]);
+						}
+						else 
+						{
+							CLContacts = currentList.getList();
+							nameSet = currentList.getList().keySet().toArray(new String[currentList.getSize()]);
+						}
+						System.out.println(String.format("Current PhoneBook: %s", CLName));
+						System.out.println("--------------------------------------");
+						printContactList();
+						System.out.println("--------------------------------------");
+						if(modeDel != 1 && modeS != 1)
+						{
+							System.out.println("Press 1 to add contact\n"
+									+ "Press 2 to delete contact\n"
+									+ "Press 3 or 4 to turn page(3 = left / 4 = right)\n"
+									+ "Press 5 to search a contact\n"
+									+ "Press 0 to exit");
+						}
+						else if(modeDel == 1) 
+						{
+							System.out.println("Press 1 - 3 to delete contact\n" 
+									+ "Press 4 or 5 to turn pages (4 = left / 5 = right)\n"
+									+ "Press 0 to exit deletion mode");
+						}
+						else if(modeS == 1)
+						{
+							System.out.println("Press 1 or 2 to turn page (1 = left / 2 = right)\n"
+									+ "Press 0 to exit");
+						}
 					}
-					else 
-					{
-						CLContacts = currentList.getList();
-						nameSet = currentList.getList().keySet().toArray(new String[currentList.getSize()]);
-					}
-					System.out.println(String.format("Current PhoneBook: %s", CLName));
-					System.out.println("--------------------------------------");
-					printContactList();
-					System.out.println("--------------------------------------");
-					if(modeDel != 1 && modeS != 1)
-					{
-						System.out.println("Press 1 to add contact\n"
-								+ "Press 2 to delete contact\n"
-								+ "Press 3 or 4 to turn page(3 = left / 4 = right)\n"
-								+ "Press 5 to search a contact\n"
-								+ "Press 0 to exit");
-					}
-					else if(modeDel == 1) 
-					{
-						System.out.println("Press 1 - 3 to delete contact\n" 
-								+ "Press 4 or 5 to turn pages (4 = left / 5 = right)\n"
-								+ "Press 0 to exit deletion mode");
-					}
-					else if(modeS == 1)
-					{
-						System.out.println("Press 1 or 2 to turn page (1 = left / 2 = right)\n"
-								+ "Press 0 to exit");
-					}
-				}
 				break;
 			case 4:
 				System.out.println("--------------------------------------");
